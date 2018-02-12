@@ -25,7 +25,7 @@ recettes = [
 selected=[];
 
 function add( recipe ){
-
+    selected=[];
     // chercher la recette
     for(i=0;i<recettes.length;i++){
         if( recettes[i].name == recipe ){
@@ -36,12 +36,10 @@ function add( recipe ){
             for( j=0;j<recettes[i].ingredients.length;j++){
                 selected.push( recettes[i].ingredients[j] );
             }
-
         }
     }
 
     display();
-
 }
 
 function display(){
@@ -60,13 +58,11 @@ function display(){
     }
     let list="";
     console.log(liste_ingredient);
-    //1) Pour chaque ingrédient dans la liste
     for (let property in liste_ingredient){
-        list += property.value; // C'EST ICI QU'IL FAUT TROUVER COMMENT ACCEDER AUX VALEURS.
+        list += liste_ingredient[property]; // C'EST ICI QU'IL FAUT TROUVER COMMENT ACCEDER AUX VALEURS.
         list += " ";
-        list += property.toString();
+        list += property;
         list += " ,";
-
     }
     console.log(list);
     document.getElementById("resultat").innerHTML = list;
