@@ -1,0 +1,34 @@
+section article {
+    float: left;
+    width: 200px;
+    background-color: #CCC;
+    border-radius: 10px;
+    margin: 0 10px;
+    padding: 10px;
+    text-align: center;
+}
+section::after {
+    clear:both;
+    display: block;
+    content: "";
+}
+section article button {
+    border: 1px solid transparent;
+    padding: 5px;
+    border-radius: 10px;
+    opacity: .5;
+    cursor: pointer;
+}
+section article button:hover {
+    opacity: 1;
+    border: 1px solid black;
+}
+section article button:first-of-type {
+    background-color: green;
+    color: #FFF;
+}
+
+section article button:last-of-type {
+    background-color: red;
+    color: #FFF;
+}
