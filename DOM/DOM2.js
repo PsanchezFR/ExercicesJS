@@ -4,7 +4,7 @@
 
 selected = {};
 
-products = [
+const products = [
     {code:'livre', name:'Fondation foudroyée', price:10 },
     {code:'console', name:'PS3', price:200 },
     {code:'fleur', name:'Orchidée', price:20 }
@@ -15,27 +15,36 @@ productList = document.getElementById("productList");
 // créer les produits
 for(i=0;i<products.length;i++){
 
+
     // créer h3 contenant le nom du produit
     productName = document.createElement("h3");
     productName.innerHTML = products[i].name;
-    console.log(productList);
-    productList.appendChild(productName);
+
 
     // Ajout d'un bouton avec le texte "ajouter" et la class "add"
     button_add = document.createElement("button");
+    button_add.innerText = "ajouter";
+    button_add.classList.add("add");
+
     // et ajout du listener sur le bouton
     addProductOnClick(button_add, products[i].code );
 
     // Meme principe pour bouton supprimer
-    // button_del = .....
+    button_del = document.createElement("button");
+    button_del.innerText = "supprimer";
+    button_del.classList.add("delete");
 
     // creation article
     article = document.createElement("article");
 
     // ajout dans article h3 + button_add + button_del
+    article.appendChild(productName);
+    article.appendChild(button_add);
+    article.appendChild(button_del);
 
     // ajout article a productList
     productList.appendChild(article);
+
 
 }
 
@@ -81,4 +90,20 @@ function displayCaddie(){
     // bonus: afficher un tableau HTML avec quatre colonnes :
     // nombre, nom produit, prix unitaire, total
     // bonus: permettre de modifier les éléments dans le panier directement.
+
+    //Creation of a table and injecting correct td
+    productsTable = document.createElement("table");
+    keys = Object.keys(products[0]);
+
+    for(element in keys){
+        currentColumn = document.createElement("th");
+        productsTable.appendChild(currentColumn);
+        currentColumn.innerText = keys[element];
+    }
+
+    // for(element in products){
+    //     products[element]
+    // }
+    document.body.appendChild(productsTable);
+
 }
