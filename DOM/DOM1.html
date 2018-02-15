@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <script src="DOM1.js"></script>
+    <link href="DOM1.css" rel="stylesheet" type="text/css">
+    <title>DOM1 exercice</title>
+</head>
+<body>
+    <form>
+        <fieldset>
+            <legend>Inscription</legend>
+            <div class="form_group">
+                <label for="subscription_login">Login</label>
+                <input type="text" name="login" id="subscription_login" onkeyup="errorTextTest()"/>
+            </div>
+            <div class="form_group">
+                <label for="subscription_password">Mot de passe</label>
+                <input type="password" name="password" id="subscription_password" />
+            </div>
+            <div class="form_group">
+                <label for="subscription_password2">Mot de passe ( répétition ) </label>
+                <input type="password"  name="password2" id="subscription_password2" />
+            </div>
+            <div class="form_group">
+                <label>Langue</label>
+                <select name="lang">
+                    <option value="">-- Sélectionnez --</option>
+                    <option value="fr">Français</option>
+                    <option value="en">English</option>
+                    <option value="de">Deutsch</option>
+                    <option value="es">Español</option>
+                </select>
+            </div>
+            <div class="form_group">
+                <label for="subscription_password2">J'accepte les cgu</label>
+                <input type="checkbox" name="cgu"  id="subscription_cgu" />
+            </div>
+            <button type="submit">Inscription</button>
+        </fieldset>
+    </form>
+</body>
+</html>

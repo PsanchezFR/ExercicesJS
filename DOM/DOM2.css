@@ -1,0 +1,36 @@
+#productList article {
+    float: left;
+    width: 200px;
+    background: #DDD;
+    margin: 5px;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+
+#productList::after {
+    clear: both;
+    display: block;
+    content: "";
+}
+
+section article button {
+    border: 1px solid transparent;
+    padding: 5px;
+    border-radius: 10px;
+    opacity: .5;
+    cursor: pointer;
+}
+section article button:hover {
+    opacity: 1;
+    border: 1px solid black;
+}
+section article button.add {
+    background-color: green;
+    color: #FFF;
+}
+
+section article button.delete {
+    background-color: red;
+    color: #FFF;
+}
