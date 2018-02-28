@@ -117,56 +117,60 @@ function initializeTable(){
     }
     //Create first row
     productsTable.appendChild(tableRow);
-    //Create X other rows
-    for(element in products) {
-        tableRow = document.createElement("tr");
-        tableRow.classList.add(products[element].code);
-        tableArray[element] = []; // create an array of array
-        tableArray[element][0] = tableRow; // first value should be a reference to the row
-        productsTable.appendChild(tableRow);
-    }
+    tableRow.classList.add("firstRow");
     //Add everything to the table
     document.body.appendChild(productsTable);
 
 }
 
-//Function to delete all the <td>
+//Function to delete all the <tr>
 function clearTable(){
-        for (let i = 0; i < tableArray.length; i++) {
-            while(tableArray[i][0].firstChild){
-            tableArray[i][0].removeChild(tableArray[i][0].firstChild);
+            while(productsTable.lastChild && productsTable.lastChild.className !== "firstRow"){
+                productsTable.removeChild(productsTable.lastChild);
             }
-        }
 }
 
 function fillTable(){
     const keysArray = Object.keys(selected);
+
+
     for (let i = 0; i < keysArray.length; i++) {
-        for (let j = 0; j < tableArray.length; j++) {
-            if(tableArray[j][0].className === keysArray[i]) {
-                //Adding number of items
-                tableArray[j][1] = document.createElement("td");
-                tableArray[j][1].innerHTML = selected[keysArray[i]];
-                tableArray[j][0].appendChild(tableArray[j][1]);
+        //Create each row
+        if(selected[keysArray[i]] > 0){
+                tableRow = document.createElement("tr");
+                tableRow.classList.add(products[i].code);
+                tableArray[i] = []; // create an array of array
+                tableArray[i][0] = tableRow; // first value should be a reference to the row
+                productsTable.appendChild(tableRow);
 
-                //Adding name
-                tableArray[j][2] = document.createElement("td");
-                tableArray[j][2].innerHTML = products[j].name;
-                tableArray[j][0].appendChild(tableArray[j][2]);
+                //Fill the rows
+                for (let j = 0; j < tableArray.length; j++) {
+                    if(tableArray[j][0].className === keysArray[i]) {
+                        //Adding number of items
+                        tableArray[j][1] = document.createElement("td");
+                        tableArray[j][1].innerHTML = selected[keysArray[i]];
+                        tableArray[j][0].appendChild(tableArray[j][1]);
 
-                //Adding price
-                tableArray[j][3] = document.createElement("td");
-                tableArray[j][3].innerHTML = products[j].price;
-                tableArray[j][0].appendChild(tableArray[j][3]);
+                        //Adding name
+                        tableArray[j][2] = document.createElement("td");
+                        tableArray[j][2].innerHTML = products[j].name;
+                        tableArray[j][0].appendChild(tableArray[j][2]);
 
-                //Adding total
-                tableArray[j][3] = document.createElement("td");
-                tableArray[j][3].innerHTML = (products[j].price * selected[keysArray[i]]);
-                tableArray[j][0].appendChild(tableArray[j][3]);
+                        //Adding price
+                        tableArray[j][3] = document.createElement("td");
+                        tableArray[j][3].innerHTML = products[j].price;
+                        tableArray[j][0].appendChild(tableArray[j][3]);
 
-                //Creating the rows
-                productsTable.appendChild(tableArray[j][0]);
+                        //Adding total
+                        tableArray[j][3] = document.createElement("td");
+                        tableArray[j][3].innerHTML = (products[j].price * selected[keysArray[i]]);
+                        tableArray[j][0].appendChild(tableArray[j][3]);
+
+                        //Creating the rows
+                        productsTable.appendChild(tableArray[j][0]);
+                    }
             }
+
         }
     }
 }
