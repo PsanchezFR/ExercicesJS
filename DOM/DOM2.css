@@ -14,6 +14,28 @@
     content: "";
 }
 
+.tableValues{
+    border: 1px solid #555555;
+}
+
+tr{
+    height: 30px;
+    width: 30px;
+    border: 1px solid black;
+}
+
+td{
+    border: 1px solid #555555;
+    height: 30px;
+    width: 30px;
+}
+
+th{
+    border: 2px solid black;
+    background-color: #555555;
+    color: #DCF1F7;
+}
+
 h3 {
 }
 

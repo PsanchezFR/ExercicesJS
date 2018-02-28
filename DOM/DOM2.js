@@ -2,6 +2,8 @@
 * Gestion produit
 */
 
+tableHeadsNames = ["nombre", "nom produit", "prix unitaire", "total"]; // titles of each <th></th>
+tableArray = []; // see initializeTable; will be an array of array.
 selected = {};
 
 const products = [
@@ -33,6 +35,8 @@ for(i=0;i<products.length;i++){
     button_del = document.createElement("button");
     button_del.innerText = "supprimer";
     button_del.classList.add("delete");
+
+    removeProductOnClick(button_del, products[i].code );
 
     // creation article
     article = document.createElement("article");
@@ -91,19 +95,68 @@ function displayCaddie(){
     // nombre, nom produit, prix unitaire, total
     // bonus: permettre de modifier les éléments dans le panier directement.
 
-    //Creation of a table and injecting correct td
-    productsTable = document.createElement("table");
-    keys = Object.keys(products[0]);
-
-    for(element in keys){
-        currentColumn = document.createElement("th");
-        productsTable.appendChild(currentColumn);
-        currentColumn.innerText = keys[element];
+    //Create the table if it's not already there
+    if(document.getElementsByTagName("table").length === 0){
+        initializeTable();
     }
+    clearTable();
+    fillTable();
 
-    // for(element in products){
-    //     products[element]
-    // }
+}
+
+//Create a table with a first row of TH. See "tableHeadsNames" global variable to change the titles.
+function initializeTable(){
+    //Creation of a table and injecting correct th/td/tr
+    productsTable = document.createElement("table");
+    tableRow = document.createElement("tr");
+    //Generation of first row
+    for(element in tableHeadsNames){
+        tableHead = document.createElement("th");
+        tableHead.innerText = tableHeadsNames[element];
+        tableRow.appendChild(tableHead);
+    }
+    //Create first row
+    productsTable.appendChild(tableRow);
+    //Create X other rows
+    for(element in products) {
+        tableRow = document.createElement("tr");
+        tableRow.classList.add("tableValues");
+        tableArray[element] = []; // create an array of array
+        tableArray[element][0] = tableRow; // first value should be a reference to the row
+    }
+    //Add everything to the table
+    productsTable.appendChild(tableRow);
     document.body.appendChild(productsTable);
 
+}
+
+//Function to delete all the <td>
+function clearTable(){
+    tableCell = document.getElementsByTagName("td");
+    if(tableCell.length > 0){
+        for (let i = 0; i < tableCell.length; i++) {
+            tableCell[i].parentNode.removeChild(tableCell[i]);
+        }
+    }
+}
+
+function fillTable(){
+    const keysArray = Object.keys(selected);
+    //add the number of each element
+    for (let i = 0; i < keysArray.length; i++) {
+        tableArray[i][1] = document.createElement("td");
+        tableArray[i][1].innerHTML = selected[keysArray[i]];
+        tableArray[i][0].appendChild(tableArray[i][1]);
+    }
+
+    //add the name of each element
+    for (let i = 0; i < keysArray.length; i++) {
+        tableArray[i][2] = document.createElement("td");
+        tableArray[i][2].innerHTML = keysArray[i];
+        tableArray[i][0].appendChild(tableArray[i][2]);
+    }
+
+    for(let i = 0; i < keysArray.length; i++) {
+        productsTable.appendChild(tableArray[i][0]);
+    }
 }
