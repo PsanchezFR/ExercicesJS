@@ -8,6 +8,7 @@ selected = {};
 
 const products = [
     {code:'livre', name:'Fondation foudroyée', price:10 },
+    {code:'gobelin', name:'Bob', price:10020 },
     {code:'console', name:'PS3', price:200 },
     {code:'fleur', name:'Orchidée', price:20 }
 ];
@@ -101,7 +102,6 @@ function displayCaddie(){
     }
     clearTable();
     fillTable();
-
 }
 
 //Create a table with a first row of TH. See "tableHeadsNames" global variable to change the titles.
@@ -120,43 +120,53 @@ function initializeTable(){
     //Create X other rows
     for(element in products) {
         tableRow = document.createElement("tr");
-        tableRow.classList.add("tableValues");
+        tableRow.classList.add(products[element].code);
         tableArray[element] = []; // create an array of array
         tableArray[element][0] = tableRow; // first value should be a reference to the row
+        productsTable.appendChild(tableRow);
     }
     //Add everything to the table
-    productsTable.appendChild(tableRow);
     document.body.appendChild(productsTable);
 
 }
 
 //Function to delete all the <td>
 function clearTable(){
-    tableCell = document.getElementsByTagName("td");
-    if(tableCell.length > 0){
-        for (let i = 0; i < tableCell.length; i++) {
-            tableCell[i].parentNode.removeChild(tableCell[i]);
+        for (let i = 0; i < tableArray.length; i++) {
+            while(tableArray[i][0].firstChild){
+            tableArray[i][0].removeChild(tableArray[i][0].firstChild);
+            }
         }
-    }
 }
 
 function fillTable(){
     const keysArray = Object.keys(selected);
-    //add the number of each element
     for (let i = 0; i < keysArray.length; i++) {
-        tableArray[i][1] = document.createElement("td");
-        tableArray[i][1].innerHTML = selected[keysArray[i]];
-        tableArray[i][0].appendChild(tableArray[i][1]);
-    }
+        for (let j = 0; j < tableArray.length; j++) {
+            if(tableArray[j][0].className === keysArray[i]) {
+                //Adding number of items
+                tableArray[j][1] = document.createElement("td");
+                tableArray[j][1].innerHTML = selected[keysArray[i]];
+                tableArray[j][0].appendChild(tableArray[j][1]);
 
-    //add the name of each element
-    for (let i = 0; i < keysArray.length; i++) {
-        tableArray[i][2] = document.createElement("td");
-        tableArray[i][2].innerHTML = keysArray[i];
-        tableArray[i][0].appendChild(tableArray[i][2]);
-    }
+                //Adding name
+                tableArray[j][2] = document.createElement("td");
+                tableArray[j][2].innerHTML = products[j].name;
+                tableArray[j][0].appendChild(tableArray[j][2]);
 
-    for(let i = 0; i < keysArray.length; i++) {
-        productsTable.appendChild(tableArray[i][0]);
+                //Adding price
+                tableArray[j][3] = document.createElement("td");
+                tableArray[j][3].innerHTML = products[j].price;
+                tableArray[j][0].appendChild(tableArray[j][3]);
+
+                //Adding total
+                tableArray[j][3] = document.createElement("td");
+                tableArray[j][3].innerHTML = (products[j].price * selected[keysArray[i]]);
+                tableArray[j][0].appendChild(tableArray[j][3]);
+
+                //Creating the rows
+                productsTable.appendChild(tableArray[j][0]);
+            }
+        }
     }
 }
