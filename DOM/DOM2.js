@@ -120,32 +120,35 @@ function initializeTable(){
     tableRow.classList.add("firstRow");
     //Add everything to the table
     document.body.appendChild(productsTable);
-
 }
 
-//Function to delete all the <tr>
+//Function to delete the table
 function clearTable(){
-            while(productsTable.lastChild && productsTable.lastChild.className !== "firstRow"){
-                productsTable.removeChild(productsTable.lastChild);
-            }
+    const table = document.getElementsByTagName("table");
+    document.body.removeChild(table[0]);
+    initializeTable();
 }
 
 function fillTable(){
     const keysArray = Object.keys(selected);
 
-
+    //Create each row
     for (let i = 0; i < keysArray.length; i++) {
-        //Create each row
-        if(selected[keysArray[i]] > 0){
+        for( element in products){
+            if(keysArray[i] === products[element].code && selected[keysArray[i]] > 0)
+            {
                 tableRow = document.createElement("tr");
-                tableRow.classList.add(products[i].code);
-                tableArray[i] = []; // create an array of array
-                tableArray[i][0] = tableRow; // first value should be a reference to the row
+                tableRow.classList.add(products[element].code); // adding a class for checking purpose
+                tableArray[element] = []; // create an array of array
+                tableArray[element][0] = tableRow; // first value should be a reference to the row
                 productsTable.appendChild(tableRow);
-
-                //Fill the rows
-                for (let j = 0; j < tableArray.length; j++) {
-                    if(tableArray[j][0].className === keysArray[i]) {
+            }
+        }
+    }
+    //Fill the rows
+    for (let i = 0; i < keysArray.length; i++) {
+        for (let j = 0; j < tableArray.length; j++) {
+            if(tableArray[j] !== undefined && tableArray[j][0].className === keysArray[i] && selected[keysArray[i]] > 0 ) {
                         //Adding number of items
                         tableArray[j][1] = document.createElement("td");
                         tableArray[j][1].innerHTML = selected[keysArray[i]];
@@ -168,9 +171,7 @@ function fillTable(){
 
                         //Creating the rows
                         productsTable.appendChild(tableArray[j][0]);
-                    }
             }
-
         }
     }
 }
