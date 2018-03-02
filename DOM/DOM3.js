@@ -20,7 +20,6 @@ let colors = [
 // et ajouter cette div à #picture1
 
 for (let i = 0; i < picture.length; i++) {
-
     let pixel = document.createElement("div");
     let parentDiv = document.getElementById("picture1");
     pixel.classList.add("pixel");
