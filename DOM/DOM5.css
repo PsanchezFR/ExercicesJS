@@ -1,0 +1,65 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+main{
+    height: 400px;
+    background-color: #000;
+    position: relative;
+}
+
+#earth {
+    background-color: lightblue;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+}
+
+#mars {
+    background-color: red;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    position: absolute;
+    top: 250px;
+    right: 0px;
+}
+
+#spaceship{
+    background-color: yellow;
+    height: 20px;
+    width: 40px;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 1px solid #000;
+}
+
+#spaceship::after{
+    width: 20px;
+    height: 10px;
+    background-color: yellow;
+    content: "";
+    position: absolute;
+    left:-10px;
+    top: -5px;
+    transform: rotate(30deg);
+    border-top: 1px solid #000;
+    border-left: 1px solid #000;
+}
+
+#spaceship::before{
+    width: 20px;
+    height: 10px;
+    background-color: yellow;
+    content: "";
+    position: absolute;
+    left:-10px;
+    bottom: -5px;
+    transform: rotate(-30deg);
+    border-bottom: 1px solid #000;
+    border-left: 1px solid #000;
+}

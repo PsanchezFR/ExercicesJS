@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     select_shape = document.getElementById("select_shape");
     select_color = document.getElementById("select_color");
     select_size = document.getElementById("select_size");
-    let currentShape;
+    let currentShapeGhost;
 
     // fonction de création d'un élément
     shape_creation = function(event){
@@ -26,20 +26,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
         //ajout du nouvel élément dans le tableau
         divToAdd = prepareShape(event);
         board.appendChild(divToAdd);
-    };
-
+    }
+    // fonction de prévisualition de la forme
     shapePrevisualisation = function onMouseMove(event){
         console.log("Shape previsualisation");
-        //suppression des anciennes formes
-        if(currentShape != null){
-            board.removeChild(currentShape);
+        //suppression de l'ancienne formes
+        if(currentShapeGhost != null){
+            board.removeChild(currentShapeGhost);
         }
-        //stockage dans une variable globale
-        currentShape = prepareShape(event);
-        currentShape.classList.add("transparent");
-        board.appendChild(currentShape);
+        //stockage et creation de la forme
+        currentShapeGhost = prepareShape(event);
+        currentShapeGhost.classList.add("transparent");
+        board.appendChild(currentShapeGhost);
     }
-
+    //fonction qui prépare la div à créer et la retourne
     function prepareShape(event) {
         currentMousePosition = [];
 
@@ -50,8 +50,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
         currentTool[2] = select_size.value;
 
         // récupération de la position du clic
-        currentMousePosition[0] = event.offsetX;
-        currentMousePosition[1] = event.offsetY;
+        currentMousePosition[0] = event.pageX - board.offsetLeft;
+        currentMousePosition[1] = event.pageY - board.offsetTop;
 
         // création d'un nouvel élément
         newDiv = document.createElement("div");
@@ -67,9 +67,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
         return newDiv;
     }
 
-
     // ajout des listeners
     board.addEventListener("mousemove", shapePrevisualisation);
     board.addEventListener("click", shape_creation);
+
 
 });
