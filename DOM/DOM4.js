@@ -25,9 +25,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         console.log("Shape creation");
         currentMousePosition = [];
 
-        // constantes pour les offset
-        const offsetX = -5;
-        const offsetY = -35;
+
         // récupération des valeurs des selects
         currentTool = [];
         currentTool[0] = select_shape.children[select_shape.selectedIndex].getAttribute("value");
@@ -35,8 +33,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
         currentTool[2] = select_size.children[select_size.selectedIndex].getAttribute("value");
 
         // récupération de la position du clic
-        currentMousePosition[0] = event.pageX;
-        currentMousePosition[1] = event.pageY;
+        currentMousePosition[0] = event.offsetX;
+        currentMousePosition[1] = event.offsetY;
 
         // création d'un nouvel élément
         newDiv = document.createElement("div");
@@ -45,10 +43,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
         newDiv.classList.add(currentTool[0]);
         newDiv.classList.add(currentTool[1]);
         newDiv.classList.add(currentTool[2]);
-
+        console.log(event.offsetTop);
         // ajout de la position de l'élément
-        newDiv.style.left = currentMousePosition[0] + offsetX + "px";
-        newDiv.style.top = currentMousePosition[1] + offsetY + "px";
+        newDiv.style.left = currentMousePosition[0] - parseInt(getComputedStyle(newDiv).width)/2 + "px";
+        newDiv.style.top =  currentMousePosition[1] - parseInt(getComputedStyle(newDiv).height)/2 + "px";
 
         //ajout du nouvel élément dans le tableau
         board.appendChild(newDiv);
