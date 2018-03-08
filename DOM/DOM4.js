@@ -18,19 +18,36 @@ document.addEventListener("DOMContentLoaded", function(event) {
     select_shape = document.getElementById("select_shape");
     select_color = document.getElementById("select_color");
     select_size = document.getElementById("select_size");
-
+    let currentShape;
 
     // fonction de création d'un élément
     shape_creation = function(event){
         console.log("Shape creation");
-        currentMousePosition = [];
+        //ajout du nouvel élément dans le tableau
+        divToAdd = prepareShape(event);
+        board.appendChild(divToAdd);
+    };
 
+    shapePrevisualisation = function onMouseMove(event){
+        console.log("Shape previsualisation");
+        //suppression des anciennes formes
+        if(currentShape != null){
+            board.removeChild(currentShape);
+        }
+        //stockage dans une variable globale
+        currentShape = prepareShape(event);
+        currentShape.classList.add("transparent");
+        board.appendChild(currentShape);
+    }
+
+    function prepareShape(event) {
+        currentMousePosition = [];
 
         // récupération des valeurs des selects
         currentTool = [];
-        currentTool[0] = select_shape.children[select_shape.selectedIndex].getAttribute("value");
-        currentTool[1] = select_color.children[select_color.selectedIndex].getAttribute("value");
-        currentTool[2] = select_size.children[select_size.selectedIndex].getAttribute("value");
+        currentTool[0] = select_shape.value;
+        currentTool[1] = select_color.value;
+        currentTool[2] = select_size.value;
 
         // récupération de la position du clic
         currentMousePosition[0] = event.offsetX;
@@ -43,16 +60,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
         newDiv.classList.add(currentTool[0]);
         newDiv.classList.add(currentTool[1]);
         newDiv.classList.add(currentTool[2]);
-        console.log(event.offsetTop);
+
         // ajout de la position de l'élément
         newDiv.style.left = currentMousePosition[0] - parseInt(getComputedStyle(newDiv).width)/2 + "px";
         newDiv.style.top =  currentMousePosition[1] - parseInt(getComputedStyle(newDiv).height)/2 + "px";
+        return newDiv;
+    }
 
-        //ajout du nouvel élément dans le tableau
-        board.appendChild(newDiv);
-    };
 
-    // ajout du listener
+    // ajout des listeners
+    board.addEventListener("mousemove", shapePrevisualisation);
     board.addEventListener("click", shape_creation);
 
 });
