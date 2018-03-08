@@ -1,0 +1,42 @@
+body { margin: 0; }
+#panel {
+    padding: 5px;
+}
+select {
+    width: 33%;
+    padding: 5px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+#board  {
+    width: 100%;
+    height: 300px;
+    background: #000;
+    position: relative; /* pour placer dedans en absolute */
+}
+
+#board div {
+    /* pour que les divs soient placés dans le #board en absolu */
+    position: absolute;
+}
+
+/** utilitaires **/
+.clearfix{ clear: both; }
+
+/* shape */
+.square{} /* rien de special pour un carré */
+.round{ border-radius: 50%; }
+.losange{ transform: rotate(45deg); }
+
+/* color */
+.blue{ background-color: blue; }
+.yellow{ background-color: yellow; }
+.red{ background-color: red; }
+.green{ background-color: green; }
+
+/* size */
+.w10  { width: 10px; height: 10px; }
+.w25  { width: 25px; height: 25px; }
+.w50  { width: 50px; height: 50px; }
+.w100 { width: 100px; height: 100px; }

@@ -8,9 +8,7 @@ selected = {};
 
 const products = [
     {code:'livre', name:'Fondation foudroyée', price:10 },
-    {code:'gobelin', name:'Bob', price:10020 },
-    {code:'console', name:'PS3', price:200 },
-    {code:'fleur', name:'Orchidée', price:20 }
+    {code:'belle-maman', name:'Marie-Cricri', price:2 }
 ];
 
 productList = document.getElementById("productList");
