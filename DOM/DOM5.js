@@ -24,31 +24,35 @@ document.addEventListener("DOMContentLoaded", function(event) {
     spaceship.style.top = spaceshipStyle.top;
     spaceship.style.left = spaceshipStyle.left;
 
+    //init spaceship variables
+    spaceshipX = 0;
+    spaceshipY = 0;
+    spaceshipAngle = 0;
 
     // function tasked to catch arrows inputs
     catch_input = function inputCatcher(event) {
         switch (event.keyCode) {
             case 37 :
-                initialAngle = spaceship.style.transform.match(/-?\d+\.?\d*/); //value as int extrated from string
-                spaceship.style.transform = 'rotate(' + (parseFloat(initialAngle[0])  + spaceshipAngularVelocity) + 'deg)';
-                console.log("left");
+                spaceshipAngle = spaceship.style.transform.match(/-?\d+\.?\d*/); //value as int extrated from string
+                spaceship.style.transform = 'rotate(' + (parseFloat(spaceshipAngle[0])  + spaceshipAngularVelocity) + 'deg)';
                 break;
             case 38 :
-                initialAngle = spaceship.style.transform.match(/-?\d+\.?\d*/);
-                spaceship.style.left = ((parseInt(spaceship.style.left) - spaceshipVelocity) * Math.cos(initialAngle * Math.PI / 180) + "px");
-                spaceship.style.top = ((parseInt(spaceship.style.top) - spaceshipVelocity) * Math.sin(initialAngle * Math.PI / 180) + "px");
-                console.log("top");
+                spaceshipAngle = spaceship.style.transform.match(/-?\d+\.?\d*/);
+                spaceshipX += spaceshipVelocity * Math.cos(parseFloat(spaceshipAngle[0]) * Math.PI / 180);
+                spaceshipY += spaceshipVelocity * Math.sin(parseFloat(spaceshipAngle[0]) * Math.PI / 180);
+                spaceship.style.left = ( spaceshipX + "px");
+                spaceship.style.top = (spaceshipY + "px");
                 break;
             case 39 :
-                initialAngle = spaceship.style.transform.match(/-?\d+\.?\d*/);
-                spaceship.style.transform = 'rotate(' + (parseFloat(initialAngle[0])  - spaceshipAngularVelocity) + 'deg)';
-                console.log("right");
+                spaceshipAngle = spaceship.style.transform.match(/-?\d+\.?\d*/);
+                spaceship.style.transform = 'rotate(' + (parseFloat(parseFloat(spaceshipAngle[0]))  - spaceshipAngularVelocity) + 'deg)';
                 break;
             case 40 :
-                initialAngle = spaceship.style.transform.match(/-?\d+\.?\d*/);
-                spaceship.style.left = ((parseInt(spaceship.style.left) + spaceshipVelocity) * Math.cos(initialAngle * Math.PI / 180)  + "px");
-                spaceship.style.top = ((parseInt(spaceship.style.top) + spaceshipVelocity) * Math.sin(initialAngle * Math.PI / 180)  + "px");
-                console.log("bot");
+                spaceshipAngle = spaceship.style.transform.match(/-?\d+\.?\d*/);
+                spaceshipX -= spaceshipVelocity * Math.cos(parseFloat(spaceshipAngle[0]) * Math.PI / 180);
+                spaceshipY -= spaceshipVelocity * Math.sin(parseFloat(spaceshipAngle[0]) * Math.PI / 180);
+                spaceship.style.left = ( spaceshipX + "px");
+                spaceship.style.top = ( spaceshipY + "px");
                 break;
         }
     }
