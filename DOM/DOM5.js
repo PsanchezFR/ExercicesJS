@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     //get HTML elements
     spaceship = document.getElementById("spaceship");
 
-    //get CSS stylesheets
+    //get HTML - CSS stylesheets
     spaceshipStyle = window.getComputedStyle(spaceship);
 
     //init the styles
