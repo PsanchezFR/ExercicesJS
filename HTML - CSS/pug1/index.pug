@@ -1,0 +1,74 @@
+doctype
+html
+  head
+    link(rel="stylesheet",
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css",
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm",
+    crossorigin="anonymous")
+    title pug1
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    meta(charset="UTF-8")
+  body
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-2
+      a.navbar-brand(href="#") Navbar
+      button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarSupportedContent", aria-controls="navbarSupportedContent", aria-expanded="false", aria-label="Toggle navigation")
+        span.navbar-toggler-icon
+
+      .collapse.navbar-collapse#navbarSupportedContent
+        ul.navbar-nav.mr-auto
+          li.nav-item.active
+            a.nav-link(href="#") Home
+              span.sr-only (current)
+
+          li.nav-item
+            a.nav-link(href="#") Link
+          li.nav-item.dropdown
+            a.nav-link.dropdown-toggle#navbarDropdown(href="#", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") Dropdown
+            .dropdown-menu(aria-labelledby="navbarDropdown")
+              .dropdown-item(href="#") Action
+              .dropdown-item(href="#") Another action
+              .dropdown-divider
+              .dropdown-item(href="#") Something else here
+
+          li.nav-item
+            a.nav-link.disabled(href="#") Disabled
+
+      form.form-inline my-2 my-lg-0
+        input.form-control.mr-sm-2(type="search", placeholder="Search", aria-label="Search")
+        button.btn.btn-outline-success.my-2.my-sm-0(type="submit") Search
+
+    .container-fluid
+      - nameList = ["Dorra", "Manu", "Stephanie", "John", "Curious Georges", "Hello world"]
+      .col-12.alert.alert-warning.alert-dismissible.fade.show.d-none.d-sm-block(role="alert") En poursuivant votre navigation, vous acceptez l'utilisation de cookies pour vous proposer des services et des offres adaptées blablabla...
+        button.close(type="button", data-dismiss="alert", aria-label="Close")
+          span(aria-hidden="true") &times;
+
+      .row.ml-md-1
+        .card.col-3.d-none.d-md-block.h-100
+          h6.bg-light.border-bottom Dropdown header
+          a.dropdown-item(href="#") Regular link
+          a.dropdown-item.active(href="#") Active link
+          a.dropdown-item(href="#") Another link
+
+        .col-12.col-md-9
+          .w-100.d-none.d-sm-block.m-0
+            nav(aria-label="breadcrumb")
+              ol.breadcrumb
+                li.breadcrumb-item
+                  a(href="#") Home
+                li.breadcrumb-item
+                  a(href="#") Library
+                li.breadcrumb-item.active(aria-current="page") Data
+          .w-100.bg-light.border.p-2
+            h1.d-none.d-sm-block About Us
+            h2 Our Team
+            .row.m-3
+              - var n = 0
+              while n < 100
+                - i = Math.floor(Math.random() * (nameList.length-1))
+                - n++
+                .col-12.col-sm-6.col-md-4.col-lg-3.d-flex.justify-content-center
+                  .p-5.m-2.text-center.bg-primary.border.border-white.text-light= nameList[i]
+            .mt-5
+              button.btn.btn-outline-primary.m-1(type="button") ← Précédent
+              button.btn.btn-outline-primary.float-right.m-1(type="button") Suivant →
