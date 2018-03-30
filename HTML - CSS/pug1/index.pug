@@ -33,12 +33,14 @@ html
           li.nav-item
             a.nav-link.disabled(href="#") Disabled
 
-      form.form-inline my-2 my-lg-0
+      form.form-inline.my-2.my-lg-0
         input.form-control.mr-sm-2(type="search", placeholder="Search", aria-label="Search")
         button.btn.btn-outline-success.my-2.my-sm-0(type="submit") Search
 
     .container-fluid
+
       - nameList = ["Dorra", "Manu", "Stephanie", "John", "Curious Georges", "Hello world"]
+
       .col-12.alert.alert-warning.alert-dismissible.fade.show.d-none.d-sm-block(role="alert") En poursuivant votre navigation, vous acceptez l'utilisation de cookies pour vous proposer des services et des offres adaptées blablabla...
         button.close(type="button", data-dismiss="alert", aria-label="Close")
           span(aria-hidden="true") &times;
@@ -64,7 +66,7 @@ html
             h2 Our Team
             .row.m-3
               - var n = 0
-              while n < 100
+              while n < 1000
                 - i = Math.floor(Math.random() * (nameList.length-1))
                 - n++
                 .col-12.col-sm-6.col-md-4.col-lg-3.d-flex.justify-content-center
