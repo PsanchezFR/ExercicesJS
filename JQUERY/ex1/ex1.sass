@@ -1,0 +1,30 @@
+
+ul
+  padding: 0
+  margin: 0
+  width: 100%
+  &:after
+    content: ""
+    display: block
+    clear: both
+  li
+    float: left
+    list-style: none
+    a
+      padding: 10px 20px
+      color: #999
+      text-decoration: none
+      border-bottom: 1px solid #CCC
+      border-left: 1px solid #CCC
+    &.active, &:hover
+      a
+        background: #DDD
+        color: #000
+
+section
+  article
+    display: none
+    border-left: 1px solid #DDD
+    padding: 20px
+    &:first-of-type
+      display: block
