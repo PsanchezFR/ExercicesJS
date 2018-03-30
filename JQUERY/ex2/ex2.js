@@ -4,6 +4,6 @@ $(function(){
     // et affiche le contenu de l'attribut "title" du a en question
     $('a').on('mouseenter', function(e){
         $('body').children('div').remove();
-        $('body').append('<div>' + $(this).attr('title') + '<div>');
+        $('body').append('<div>' + $(this).attr('title') + '</div>');
     });
 });
