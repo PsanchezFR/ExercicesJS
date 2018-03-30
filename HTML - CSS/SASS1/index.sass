@@ -1,0 +1,37 @@
+$breakpoints:(xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px)
+
+@mixin breakpoint($point)
+  @if $point == xs
+    @media (min-width: 0) and (max-width: 575px)
+      @content
+  @else if $point == sm
+    @media (min-width: 576px) and (max-width: 767px)
+      @content
+  @else if $point == md
+    @media (min-width: 768px) and (max-width: 991px)
+      @content
+  @else if $point == lg
+    @media (min-width: 992px) and (max-width: 1199px)
+      @content
+  @else if $point == xl
+    @media (min-width: 1200px)
+      @content
+
+
+//map_get($breakpoints, breakpointName)
+@mixin col-creation($gridMaxValue)
+  @for $i from 1 to $gridMaxValue+1
+    @each $key, $value in $breakpoints
+      .col-#{$key}-#{$i}
+        margin: 2px
+        background: #2e6da4
+        @include breakpoint($key)
+          width: calc(100% * #{$i} / #{$gridMaxValue})
+
+
+body
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  justify-content: space-around
+  @include col-creation(12)
