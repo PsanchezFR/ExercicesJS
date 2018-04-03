@@ -1,0 +1,17 @@
+doctype
+html
+  head
+    script(src="https://code.jquery.com/jquery-3.3.1.min.js")
+    script(src="ex5.js")
+    link(href="ex5.css" rel="stylesheet" type="text/css")
+    meta(charset="UTF-8")
+
+
+  body
+    - n = 0
+    while n < 12
+      - n++
+      article(id='animation' + n)
+      if n % 4 === 0
+        .clearfix
+
